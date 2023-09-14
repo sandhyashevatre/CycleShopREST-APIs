@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>TalentSprint cycle shop</title>
+<style>
+    /* Style the body */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+
+    /* Style the header */
+    h1 {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* Style the table */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    /* Style table headers */
+    th {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: left;
+    }
+    /* Style table cells */
+    td {
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+    /* Style the form inputs */
+    input[type="text"] {
+        width: 50px;
+        padding: 5px;
+    }
+
+    /* Style the form submit buttons */
+    input[type="submit"] {
+        background-color: #333;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+    }
+    /* Style the form submit buttons on hover */
+    input[type="submit"]:hover {
+        background-color: #555;
+    }
+</style>
+</head>
+<body>
+    <h1>Cycle shop</h1>
+    <table>
+        <tr>
+            <th>Brand</th>
+            <th>Stock available</th>
+            <th>Operation</th>
+        </tr>
+        <tr th:each="cycle : ${allCycles}">
+            <td th:text="${cycle.brand}">Brand</td>
+            <td th:text="${cycle.numAvailable}">0</td>
+            <td> 
+                <form action="#" th:action="@{./{id}/borrow(id=${cycle.id})}" method="get">
+                    <input type="text" name="count">
+                    <input type="submit" value="BORROW">
+                </form>
+                <form action="#" th:action="@{./{id}/return(id=${cycle.id})}" method="get">
+                    <input type="text" name="count">
+                    <input type="submit" value="RETURN">
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

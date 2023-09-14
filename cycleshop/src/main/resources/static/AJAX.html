@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CycleShop</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+        /* Style for the heading */
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Style for the button */
+        #list {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Style for the container div */
+        #cycle-list {
+            margin: 20px auto;
+            padding: 10px;
+            width: 80%;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* Style for individual cycle items */
+        .cycle-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        $(document).ready(function () {
+            $("#list").click(function () {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json",
+                    url: "/api/cycles/list",
+                    success: function (data) {
+                        var div2 = $("<div>");
+                        for (var i = 0; i < data.length; i++) {
+                            var brand = $("<div>").addClass("cycle-item").text("Brand: " + data[i].brandname);
+                            var counter = $("<div>").addClass("cycle-item").text("Counter: " + data[i].counter);
+                            div2.append(brand);
+                            div2.append(counter);
+                        }
+                        $("#cycle-list").html(div2);
+                    },
+                    error: function (e) {
+                        var json = e.responseText;
+                        $("#cycle-list").html(json);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <h1>All Cycles</h1>
+
+    <button id="list">List Cycles</button>
+
+    <div id="cycle-list"></div>
+</body>
+</html>
