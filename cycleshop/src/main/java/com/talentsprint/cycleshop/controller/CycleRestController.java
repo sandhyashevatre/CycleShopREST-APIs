@@ -71,11 +71,7 @@ public class CycleRestController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Registration failed: " + e.getMessage());
 
         }
-
     }
-
- 
-
     @GetMapping("/login")
 
     public String LoginForm(Model model) {

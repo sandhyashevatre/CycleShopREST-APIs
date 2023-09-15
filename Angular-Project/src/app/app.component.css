@@ -1,0 +1,12 @@
+input{
+    border-radius: 3px ;
+    border: #341202;
+}
+th{
+    color: aqua;
+    border: 2px black;
+}
+td{
+    color: aquamarine;
+    border: 2px black;
+}

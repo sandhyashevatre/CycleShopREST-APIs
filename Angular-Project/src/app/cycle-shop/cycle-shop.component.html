@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>TalentSprint cycle shop</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Cycle shop</h1>
+    <table>
+        <tr>
+            <th>Brand</th>
+            <th>Stock available</th>
+            <th>Operation</th>
+        </tr>
+        <tr *ngFor="let cycle of allCycles">
+            <td>{{ cycle.brand }}</td>
+            <td>{{ cycle.stock-cycle.numBorrowed }}</td>
+            <td> 
+                <form>
+                    <input type="text" name="count" #Number>
+                    <input type="button" value="BORROW" (click)="borrowCycle(cycle.id, Number.value)">
+                    <input type="button" value="RESTOCK" (click)="restockCycle(cycle.id, Number.value)">
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
