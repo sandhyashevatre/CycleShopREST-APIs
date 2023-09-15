@@ -1,2 +1,2 @@
 # CycleShopREST-APIs
-![image(angular.png)]
+![image](https://github.com/sandhyashevatre/CycleShopREST-APIs/blob/main/angular.png)
