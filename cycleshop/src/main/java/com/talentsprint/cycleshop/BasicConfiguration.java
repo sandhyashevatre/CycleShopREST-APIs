@@ -55,20 +55,17 @@ public class BasicConfiguration {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(userDetailsService);
     }
-
-    @Bean
+    @Bean 
     public UserDetailsService userDetailsService() {
         return userDetailsService;
     }
-
-    
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
             .csrf(csrf -> csrf.disable())
+            .cors(cors -> cors.disable())// this gives the access to data flow between different ports
             .authorizeHttpRequests((requests) -> requests
-            .requestMatchers("/api/register", "/api/auth/token").permitAll()
+            .requestMatchers("/api/register", "/api/auth/token","/api/cycle/list","/api/{id}/borrow","/api/{id}/return","/api/{id}/restock").permitAll()
             .anyRequest().authenticated())
             .logout(withDefaults())
             .httpBasic(withDefaults())
