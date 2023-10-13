@@ -9,11 +9,11 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="cycles")
+@Table(name = "cycles")
 public class Cycle {
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String brand;
     private int stock;
@@ -22,6 +22,5 @@ public class Cycle {
     public int getNumAvailable() {
         return stock - numBorrowed;
     }
-
 
 }

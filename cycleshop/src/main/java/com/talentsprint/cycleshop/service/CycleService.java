@@ -25,31 +25,31 @@ public class CycleService {
 
     public List<Cycle> listAvailableCycles() {
         return listCycles()
-        .stream()
-        .filter(cycle -> cycle.getNumAvailable() > 0)
-        .collect(Collectors.toList());
+                .stream()
+                .filter(cycle -> cycle.getNumAvailable() > 0)
+                .collect(Collectors.toList());
     }
 
     public Cycle findByIdOrThrow404(long id) {
         var optCycle = cycleRepository.findById(id);
         if (optCycle.isEmpty()) {
             throw new CycleShopBusinessException(
-                String.format("Can't find the cycle with id %d in the DB",
-                id));
+                    String.format("Can't find the cycle with id %d in the DB",
+                            id));
         }
         return optCycle.get();
     }
 
-    public void borrowCycle(long id, int count) {
+    public Cycle borrowCycle(long id, int count) {
         var cycle = findByIdOrThrow404(id);
         cycle.setNumBorrowed(cycle.getNumBorrowed() + count);
-        cycleRepository.save(cycle);
+        return cycleRepository.save(cycle);
     }
 
-    public void returnCycle(long id, int count) {
+    public Cycle returnCycle(long id, int count) {
         var cycle = findByIdOrThrow404(id);
         cycle.setNumBorrowed(cycle.getNumBorrowed() - count);
-        cycleRepository.save(cycle);
+        return cycleRepository.save(cycle);
     }
 
     public void borrowCycle(long id) {
@@ -60,10 +60,10 @@ public class CycleService {
         returnCycle(id, 1);
     }
 
-    public void restockBy(long id, int count) {
+    public Cycle restockBy(long id, int count) {
         var cycle = findByIdOrThrow404(id);
         cycle.setStock(cycle.getStock() + count);
-        cycleRepository.save(cycle);
+        return cycleRepository.save(cycle);
     }
 
 }

@@ -51,5 +51,4 @@ public class APIAuthController {
 
         return this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
-
 }

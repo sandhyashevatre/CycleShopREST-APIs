@@ -9,10 +9,10 @@ import com.talentsprint.cycleshop.entity.Cycle;
 import com.talentsprint.cycleshop.entity.User;
 
 @SpringBootTest
-public class CycleEntityTest {
+class CycleEntityTest {
 
     @Test
-    public void testCycleModel() {
+    void testCycleModel() {
         Cycle cycle = new Cycle();
         cycle.setId(1);
         cycle.setBrand("Mountain Bike");
@@ -27,7 +27,7 @@ public class CycleEntityTest {
     }
 
     @Test
-    public void testUserModel() {
+    void testUserModel() {
         User user = new User();
         user.setId(1);
         user.setName("John");
@@ -39,6 +39,5 @@ public class CycleEntityTest {
         assertEquals("password", user.getPassword());
         assertEquals("USER", user.getRole());
     }
-
 }
 

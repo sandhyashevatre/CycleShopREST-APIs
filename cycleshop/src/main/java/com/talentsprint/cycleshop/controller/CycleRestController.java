@@ -1,17 +1,11 @@
 package com.talentsprint.cycleshop.controller;
 
-import java.security.Principal;
-import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +25,7 @@ import com.talentsprint.cycleshop.service.CycleService;
 @RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CycleRestController {
-    
+
     @Autowired
     private CycleService cycleService;
 
@@ -47,27 +41,25 @@ public class CycleRestController {
     }
 
     @PostMapping("/{id}/borrow")
-    public List<Cycle> borrowCycles(@PathVariable int id,@RequestParam int count){
-        cycleService.borrowCycle(id,count);
+    public List<Cycle> borrowCycles(@PathVariable int id, @RequestParam int count) {
+        cycleService.borrowCycle(id, count);
         return all();
     }
 
     @PostMapping("/{id}/return")
-    public List<Cycle> returnCycles(@PathVariable int id,@RequestParam int count){
+    public List<Cycle> returnCycles(@PathVariable int id, @RequestParam int count) {
         cycleService.returnCycle(id, count);
         return all();
     }
 
     @PostMapping("/{id}/restock")
-    public List<Cycle> restockCycles(@PathVariable int id,@RequestParam int count){
+    public List<Cycle> restockCycles(@PathVariable int id, @RequestParam int count) {
         cycleService.restockBy(id, count);
         return all();
     }
 
     @GetMapping("/cycle/list")
     public List<Cycle> all() {
-        //Jwt jwt = (Jwt) authentication.getPrincipal();
-        //System.out.println(jwt.getClaimAsString("scope"));
         return cycleService.listAvailableCycles();
     }
 
@@ -83,10 +75,5 @@ public class CycleRestController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Registration failed: " + e.getMessage());
         }
-    }
-
-    @GetMapping("/login")
-    public String LoginForm(Model model) {
-        return "userLogin";
     }
 }

@@ -10,7 +10,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotLoggedInException.class)
     public ModelAndView handleNotLoggedInException() {
-        // Redirect to the login page
         return new ModelAndView("redirect:/loginpage");
     }
 }
