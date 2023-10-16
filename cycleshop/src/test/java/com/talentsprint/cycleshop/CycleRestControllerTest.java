@@ -69,25 +69,25 @@ class CycleRestControllerTest {
 
     @Test
     void testBorrowCycles() throws Exception {
-        // Prepare a sample cycle and user
-        Cycle cycle = new Cycle();
+       
+        Cycle cycle = new Cycle(); // Prepare a sample cycle and user
         cycle.setId(1);
-        // Mock the service method
-        when(cycleService.borrowCycle(1, 3)).thenReturn(cycle);
-        // Send a request to borrow cycles
-        mockMvc.perform(post("/api/1/borrow")
+        
+        when(cycleService.borrowCycle(1, 3)).thenReturn(cycle);// Mock the service method
+       
+        mockMvc.perform(post("/api/1/borrow") // Send a request to borrow cycles
                 .param("count", "3"))
                 .andExpect(status().isOk());
     }
 
     @Test
     void testReturnCycles() throws Exception {
-        // Prepare a sample cycle and user
+        
         Cycle cycle = new Cycle();
         cycle.setId(1);
-        // Mock the service method
+        
         when(cycleService.returnCycle(1, 3)).thenReturn(cycle);
-        // Send a request to return cycles
+        
         mockMvc.perform(post("/api/1/return")
                 .param("count", "3"))
                 .andExpect(status().isOk());
@@ -95,70 +95,73 @@ class CycleRestControllerTest {
 
     @Test
     void testRestockCycles() throws Exception {
-        // Prepare a sample cycle and user
+       
         Cycle cycle = new Cycle();
         cycle.setId(1);
-        // Mock the service method
+      
         when(cycleService.restockBy(1, 3)).thenReturn(cycle);
-        // Send a request to restock cycles
+        
         mockMvc.perform(post("/api/1/restock")
                 .param("count", "3"))
                 .andExpect(status().isOk());
     }
 
-    //Auth
+    // Auth
     @SpringBootTest
     class APIAuthControllerTest {
 
-    private MockMvc mockMvc;
+        private MockMvc mockMvc;
 
-    @MockBean
-    private AuthenticationManager authenticationManager;
+        @MockBean
+        private AuthenticationManager authenticationManager;
 
-    @MockBean
-    private JwtEncoder jwtEncoder;
+        @MockBean
+        private JwtEncoder jwtEncoder;
 
-    // @BeforeEach
-//     public void setup() {
-//         this.mockMvc = MockMvcBuilders
-//             .standaloneSetup(new APIAuthController())
-//             .apply(SecurityMockMvcConfigurers.springSecurity())
-//             .build();
-//     }
+        // @BeforeEach
+        // public void setup() {
+        // this.mockMvc = MockMvcBuilders
+        // .standaloneSetup(new APIAuthController())
+        // .apply(SecurityMockMvcConfigurers.springSecurity())
+        // .build();
+        // }
 
-//     @Test
-//     public void testGenerateTokenWithValidCredentials() throws Exception {
-//         // Mock successful authentication
-//         when(authenticationManager.authenticate(new UsernamePasswordAuthenticationToken("testuser", "testpassword")))
-//             .thenReturn(new UsernamePasswordAuthenticationToken("testuser", "testpassword", Collections.emptyList()));
+        // @Test
+        // public void testGenerateTokenWithValidCredentials() throws Exception {
+        // // Mock successful authentication
+        // when(authenticationManager.authenticate(new
+        // UsernamePasswordAuthenticationToken("testuser", "testpassword")))
+        // .thenReturn(new UsernamePasswordAuthenticationToken("testuser",
+        // "testpassword", Collections.emptyList()));
 
-//         // Mock JWT token generation
-//         when(jwtEncoder.encode(Mockito.any())).thenReturn("VALID_JWT_TOKEN");
+        // // Mock JWT token generation
+        // when(jwtEncoder.encode(Mockito.any())).thenReturn("VALID_JWT_TOKEN");
 
-//         // Create a LoginBody with valid credentials
-//         LoginBody loginBody = new LoginBody("testuser", "testpassword");
+        // // Create a LoginBody with valid credentials
+        // LoginBody loginBody = new LoginBody("testuser", "testpassword");
 
-//         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/token")
-//             .contentType("application/json")
-//             .content(new ObjectMapper().writeValueAsString(loginBody)))
-//             .andExpect(MockMvcResultMatchers.status().isOk())
-//             .andExpect(MockMvcResultMatchers.content().string("VALID_JWT_TOKEN"));
-//     }
+        // mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/token")
+        // .contentType("application/json")
+        // .content(new ObjectMapper().writeValueAsString(loginBody)))
+        // .andExpect(MockMvcResultMatchers.status().isOk())
+        // .andExpect(MockMvcResultMatchers.content().string("VALID_JWT_TOKEN"));
+        // }
 
-//     @Test
-//     public void testGenerateTokenWithInvalidCredentials() throws Exception {
-//         // Mock authentication failure
-//         when(authenticationManager.authenticate(new UsernamePasswordAuthenticationToken("testuser", "invalidpassword")))
-//             .thenThrow(new BadCredentialsException("Invalid credentials"));
+        // @Test
+        // public void testGenerateTokenWithInvalidCredentials() throws Exception {
+        // // Mock authentication failure
+        // when(authenticationManager.authenticate(new
+        // UsernamePasswordAuthenticationToken("testuser", "invalidpassword")))
+        // .thenThrow(new BadCredentialsException("Invalid credentials"));
 
-//         // Create a LoginBody with invalid credentials
-//         LoginBody loginBody = new LoginBody("testuser", "invalidpassword");
+        // // Create a LoginBody with invalid credentials
+        // LoginBody loginBody = new LoginBody("testuser", "invalidpassword");
 
-//         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/token")
-//             .contentType("application/json")
-//             .content(new ObjectMapper().writeValueAsString(loginBody)))
-//             .andExpect(MockMvcResultMatchers.status().isUnauthorized())
-//             .andExpect(MockMvcResultMatchers.content().string(""));
-//     }
- }
+        // mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/token")
+        // .contentType("application/json")
+        // .content(new ObjectMapper().writeValueAsString(loginBody)))
+        // .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+        // .andExpect(MockMvcResultMatchers.content().string(""));
+        // }
+    }
 }

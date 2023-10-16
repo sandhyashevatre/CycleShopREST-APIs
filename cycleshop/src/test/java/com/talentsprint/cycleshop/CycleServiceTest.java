@@ -26,26 +26,26 @@ class CycleServiceTest {
 
     @Test
     void testBorrowCycle() {
-        // Create a test cycle
+       
         Cycle testCycle = new Cycle();
         testCycle.setId(1);
         testCycle.setStock(10);
         testCycle.setNumBorrowed(0);
 
-        // Mock cycleRepository behavior
-        when(cycleRepository.findById(any())).thenReturn(Optional.of(testCycle));
+        
+        when(cycleRepository.findById(any())).thenReturn(Optional.of(testCycle));// Mock cycleRepository behavior
         when(cycleRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
 
-        // Test borrowing one cycle
-        Cycle borrowedCycle = cycleService.borrowCycle(1, 1);
+      
+        Cycle borrowedCycle = cycleService.borrowCycle(1, 1);  // Test borrowing one cycle
 
-        // Assert the results
-        assertEquals(1, borrowedCycle.getNumBorrowed());
+        
+        assertEquals(1, borrowedCycle.getNumBorrowed());// Assert the results
     }
 
     @Test
     void testReturnCycle() {
-        // Create a test cycle
+        
         Cycle testCycle = new Cycle();
         testCycle.setId(1);
         testCycle.setStock(10);
